@@ -51,14 +51,14 @@ function StopWatch({convToFullTime}) {
   useEffect(() => {
     const interval = setInterval(() => {
       setMs(ms => ms + 1);
-    }, 1);
+    }, );
     return () => {
       clearInterval(interval);
     }
   });
 
   return (
-    <Text>{convToFullTime(ms)} seconds have passed</Text>
+    <Text>{convToFullTime(ms*2)} seconds have passed</Text>
   )
 }
 
