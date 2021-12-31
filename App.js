@@ -4,16 +4,29 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
   const [count, setCount] = useState(0);
-
+  const [started, setStarted] = useState(false);
+  const [time, setTime] = useState(0);
+  
   const handleChange = () => {
-    setCount(count+1);
+    let currentTime = Date.now();
+    if (started){
+      setTime(currentTime - time);
+    } else {
+      setTime(currentTime);
+    }
+    setStarted(!started);
   }
 
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
+      {
+        !started?
+          <Text>Time elapsed: {time}</Text>
+          :
+          null
+      }
       <Text>Count: {count}</Text>
-      <Button title='change count' onPress={handleChange}/>
+      <Button title='change count' onPress={handleChange}/>:
       <StatusBar style="auto" />
     </View>
   );
