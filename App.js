@@ -17,16 +17,17 @@ export default function App() {
     setStarted(!started);
   }
 
-  function millisToMinutesAndSeconds(millis) {
+  function convToFullTime(millis) {
     var minutes = Math.floor(millis / 60000);
     var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+    var ms = (millis % 1000);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds + ":" + ms;
   }
 
   if (!started) {
     return(
       <View style={styles.container}>
-        <Text>Time elapsed: {millisToMinutesAndSeconds(time)}</Text>
+        <Text>Time elapsed: {convToFullTime(time)}</Text>
         <Button title='change count' onPress={handleChange}/>
         <StatusBar style="auto" />
       </View>
@@ -37,7 +38,7 @@ export default function App() {
       <View style={styles.container}>
 
 
-        <StopWatch />
+        <StopWatch convToFullTime = {convToFullTime}/>
         <Button title='change count' onPress={handleChange}/>
         <StatusBar style="auto" />
       </View>
@@ -45,18 +46,19 @@ export default function App() {
   }
 }
 
-function StopWatch() {
-  const [second, setSecond] = useState(0);
+function StopWatch({convToFullTime}) {
+  const [ms, setMs] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecond(second => second + 1);
-    }, 1000);
+      setMs(ms => ms + 1);
+    }, 1);
     return () => {
       clearInterval(interval);
     }
-  }, []);
+  });
+
   return (
-    <Text>{second} seconds have passed</Text>
+    <Text>{convToFullTime(ms)} seconds have passed</Text>
   )
 }
 
