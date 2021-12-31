@@ -20,6 +20,7 @@ export default function App() {
   if (!started) {
     return(
       <View style={styles.container}>
+        <Text>Time elapsed: {time}</Text>
         <Button title='change count' onPress={handleChange}/>
         <StatusBar style="auto" />
       </View>
@@ -29,10 +30,8 @@ export default function App() {
     return (
       <View style={styles.container}>
 
-        <Text>Time elapsed: {time}</Text>
 
         <StopWatch />
-        <Text>Count: {count}</Text>
         <Button title='change count' onPress={handleChange}/>
         <StatusBar style="auto" />
       </View>
