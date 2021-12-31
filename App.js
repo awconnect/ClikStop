@@ -17,10 +17,16 @@ export default function App() {
     setStarted(!started);
   }
 
+  function millisToMinutesAndSeconds(millis) {
+    var minutes = Math.floor(millis / 60000);
+    var seconds = ((millis % 60000) / 1000).toFixed(0);
+    return minutes + ":" + (seconds < 10 ? '0' : '') + seconds;
+  }
+
   if (!started) {
     return(
       <View style={styles.container}>
-        <Text>Time elapsed: {time}</Text>
+        <Text>Time elapsed: {millisToMinutesAndSeconds(time)}</Text>
         <Button title='change count' onPress={handleChange}/>
         <StatusBar style="auto" />
       </View>
@@ -43,8 +49,8 @@ function StopWatch() {
   const [second, setSecond] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecond(second => second + 1);
-    }, 1000);
+      setSecond(second => second + 0.01);
+    }, 1);
     return () => {
       clearInterval(interval);
     }
