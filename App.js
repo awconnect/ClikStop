@@ -49,8 +49,8 @@ function StopWatch() {
   const [second, setSecond] = useState(0);
   useEffect(() => {
     const interval = setInterval(() => {
-      setSecond(second => second + 0.01);
-    }, 1);
+      setSecond(second => second + 1);
+    }, 1000);
     return () => {
       clearInterval(interval);
     }
