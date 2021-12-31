@@ -16,9 +16,8 @@ export default function App() {
     }
     setStarted(!started);
   }
-  setInterval()
 
-  if (started) {
+  if (!started) {
     return(
       <View style={styles.container}>
         <Button title='change count' onPress={handleChange}/>
@@ -30,28 +29,15 @@ export default function App() {
     return (
       <View style={styles.container}>
 
-      <Text>Time elapsed: {time}</Text>
+        <Text>Time elapsed: {time}</Text>
 
-      <StopWatch />
-      <Text>Count: {count}</Text>
-      <Button title='change count' onPress={handleChange}/>
-      <StatusBar style="auto" />
-    </View>
+        <StopWatch />
+        <Text>Count: {count}</Text>
+        <Button title='change count' onPress={handleChange}/>
+        <StatusBar style="auto" />
+      </View>
     );
   }
-
-  return (
-    <View style={styles.container}>
-      {!started&&
-      <Text>Time elapsed: {time}</Text>
-      } 
-
-      {!started && <StopWatch />}
-      <Text>Count: {count}</Text>
-      <Button title='change count' onPress={handleChange}/>
-      <StatusBar style="auto" />
-    </View>
-  );
 }
 
 function StopWatch() {
@@ -65,7 +51,7 @@ function StopWatch() {
     }
   }, []);
   return (
-    <Text>{second} seconds have pas</Text>
+    <Text>{second} seconds have passed</Text>
   )
 }
 
