@@ -2,6 +2,7 @@
   "expo": {
     "name": "ClikStop",
     "slug": "ClikStop",
+    "owner": "r0ot",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
