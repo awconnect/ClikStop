@@ -19,12 +19,9 @@ export default function App() {
 
   return (
     <View style={styles.container}>
-      {
-        !started?
-          <Text>Time elapsed: {time}</Text>
-          :
-          null
-      }
+      {!started&&
+      <Text>Time elapsed: {time}</Text>
+      } 
       <Text>Count: {count}</Text>
       <Button title='change count' onPress={handleChange}/>:
       <StatusBar style="auto" />
