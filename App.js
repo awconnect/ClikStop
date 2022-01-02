@@ -75,17 +75,30 @@ function StopWatch() {
   }
 
   if(topTime === null) {
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text>{getTimeIncrements(time)}</Text>
+    if (!started) {
+      return (
+        <View style={styles.container}>
+          <View>
+            <Text>{getTimeIncrements(time)}</Text>
+          </View>
+  
+          <Button title='Start' onPress={isStarted}/>
+          <Button title='Reset' onPress={reset}/>
         </View>
+      );
+    } else {
+      return (
+        <View style={styles.container}>
+          <View>
+            <Text>{getTimeIncrements(time)}</Text>
+          </View>
 
-        <Button title='Start' onPress={isStarted}/>
-        <Button title='Reset' onPress={reset}/>
-      </View>
-    );
-  }
+          <Button title='Stop' onPress={isStarted}/>
+          <Button title='Reset' onPress={reset}/>
+        </View>
+      );
+    }
+  } 
   if (!started) {
     return (
       <View style={styles.container}>
