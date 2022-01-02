@@ -3,17 +3,29 @@ import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
 
 export default function App() {
-  const [count, setCount] = useState(0);
   const [started, setStarted] = useState(false);
   const [time, setTime] = useState(0);
   
-  const handleChange = () => {
-    let currentTime = Date.now();
-    if (started){
-      setTime(currentTime - time);
-    } else {
-      setTime(currentTime);
+  useEffect(() => {
+    let interval = null;
+    if (started) {
+      interval = setInterval(() => {
+        setTime(time + 0.01);
+      }, 1);
+    } else if (!started && time !== 0) {
+      clearInterval(interval);
     }
+    return () => {
+      clearInterval(interval);
+    }
+  }, [started, time]);
+
+  const reset = () => {
+    setTime(0);
+    setStarted(false);
+  }
+
+  const isStarted = () => {
     setStarted(!started);
   }
 
@@ -25,41 +37,32 @@ export default function App() {
   }
 
   if (!started) {
-    return(
+    return (
       <View style={styles.container}>
-        <Text>Time elapsed: {convToFullTime(time)}</Text>
-        <Button title='change count' onPress={handleChange}/>
-        <StatusBar style="auto" />
+        <View>
+          <Text>{convToFullTime(time)}s</Text>
+        </View>
+  
+        <View>
+          <Button title='Start' onPress={isStarted}/>
+          <Button title='Reset' onPress={reset}/>
+        </View>
       </View>
-
     );
   } else {
     return (
       <View style={styles.container}>
-
-
-        <StopWatch convToFullTime = {convToFullTime}/>
-        <Button title='change count' onPress={handleChange}/>
-        <StatusBar style="auto" />
+        <View>
+          <Text>{convToFullTime(time)}s</Text>
+        </View>
+  
+        <View>
+          <Button title='Stop' onPress={isStarted}/>
+          <Button title='Reset' onPress={reset}/>
+        </View>
       </View>
     );
   }
-}
-
-function StopWatch({convToFullTime}) {
-  const [ms, setMs] = useState(0);
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setMs(ms => ms + 1);
-    }, );
-    return () => {
-      clearInterval(interval);
-    }
-  });
-
-  return (
-    <Text>{convToFullTime(ms*2)} seconds have passed</Text>
-  )
 }
 
 const styles = StyleSheet.create({
