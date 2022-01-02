@@ -5,17 +5,14 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 export default function App() {
   const [started, setStarted] = useState(false);
   const [time, setTime] = useState(0);
-  const [date, setDate] = useState(Date.now());
   
   useEffect(() => {
     let interval = null;
     if (started) {
       interval = setInterval(() => {
         setTime(time + 0.01);
-        setDate(Date.now() - date);
       }, 10);
-    } else if (time !== 0) {
-      stopping = new Date(); 
+    } else if (!started && time !== 0) {
       clearInterval(interval);
     }
     return () => {
@@ -25,7 +22,7 @@ export default function App() {
 
   const reset = () => {
     setTime(0);
-    setStarted(false);    
+    setStarted(false);
   }
 
   const isStarted = () => {
@@ -43,8 +40,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <View>
-        <Text>{time.toFixed(3)}s</Text>
-        <Text>Date: {date}</Text>
+          <Text>{time.toFixed(3)}s</Text>
         </View>
   
         <View>
