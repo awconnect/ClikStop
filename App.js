@@ -11,7 +11,7 @@ export default function App() {
     if (started) {
       interval = setInterval(() => {
         setTime(time + 0.01);
-      }, 1);
+      }, 10);
     } else if (!started && time !== 0) {
       clearInterval(interval);
     }
@@ -40,7 +40,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <View>
-          <Text>{convToFullTime(time)}s</Text>
+          <Text>{time.toFixed(3)}s</Text>
         </View>
   
         <View>
@@ -53,7 +53,7 @@ export default function App() {
     return (
       <View style={styles.container}>
         <View>
-          <Text>{convToFullTime(time)}s</Text>
+          <Text>{time.toFixed(3)}s</Text>
         </View>
   
         <View>
