@@ -4,11 +4,11 @@ import {StyleSheet, View } from 'react-native';
 import StopWatch  from './StopWatch';
 import Leaderboard from './Leaderboard';
 
-export const AppContext = React.createContext();
+// export const AppContext = React.createContext();
 
-const initialState = {
-  topTimes: [],
-};
+// const initialState = {
+//   topTimes: [],
+// };
 
 
 export const getTimeIncrements = (date) => {
@@ -23,33 +23,30 @@ export const getTimeIncrements = (date) => {
 }
 
 
-function reducer(state, action) {
-  switch (action.type) {
-      case 'UPDATE_INPUT':
-          return {
-              topTimes: action.data
-          };
+// function reducer(state, action) {
+//   switch (action.type) {
+//       case 'UPDATE_INPUT':
+//           return {
+//               topTimes: action.data
+//           };
 
-      default:
-          return initialState;
-  }
-}
+//       default:
+//           return initialState;
+//   }
+// }
 
 
 
 
 export default function App() {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  //const [state, dispatch] = useReducer(reducer, initialState);
   
 
  return (
-  <AppContext.Provider value={{ state, dispatch }}>
     <View style={styles.container}>
         <StopWatch />
-        <Leaderboard />
+        {/* <Leaderboard /> */}
     </View>
-  </AppContext.Provider>
-
  );
 }
 
