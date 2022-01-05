@@ -1,6 +1,6 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { AppContext } from './App';
+// import { AppContext } from './App';
 import getTimeIncrements from "./App";
 import { styles } from './App';
 

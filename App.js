@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import React, { useEffect, useState, useReducer } from 'react';
+import React, { useEffect, useState } from 'react';
 import {StyleSheet, View } from 'react-native';
 import StopWatch  from './StopWatch';
 import Leaderboard from './Leaderboard';
