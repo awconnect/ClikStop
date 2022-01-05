@@ -1,18 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-import { AppContext } from './App';
 import getTimeIncrements from "./App";
-import { styles } from './App';
 
-
-
- export default function StopWatch() {
-
-    // const {state, dispatch} = useContext(AppContext);
-
-    // const changeTopTimesValue = (newValue) => {
-    //     dispatch({ type: 'UPDATE_INPUT', data: newValue});
-    // };
+export default function StopWatch() {
 
     const [started, setStarted] = useState(false);
     const [isFirst, setIsFirst] = useState(false);
@@ -75,35 +65,35 @@ import { styles } from './App';
       }
     }
   
-    // if(state.topTimes === []) {
-    //   if (!started) {
-    //     return (
-    //       <View style={styles.container}>
-    //         <View>
-    //           <Text>{getTimeIncrements(time)}</Text>
-    //         </View>
+    if(topTimes === []) {
+      if (!started) {
+        return (
+          <View>
+            <View>
+              <Text>{getTimeIncrements(time)}</Text>
+            </View>
     
-    //         <Button title='Start' onPress={isStarted}/>
-    //         <Button title='Reset' onPress={reset}/>
-    //       </View>
-    //     );
-    //   } else {
-    //     return (
-    //       <View style={styles.container}>
-    //         <View>
-    //           <Text>{getTimeIncrements(time)}</Text>
-    //         </View>
+            <Button title='Start' onPress={isStarted}/>
+            <Button title='Reset' onPress={reset}/>
+          </View>
+        );
+      } else {
+        return (
+          <View>
+            <View>
+              <Text>{getTimeIncrements(time)}</Text>
+            </View>
   
-    //         <Button title='Stop' onPress={isStarted}/>
-    //         <Button title='Reset' onPress={reset}/>
-    //       </View>
-    //     );
-    //   }
-    // } 
+            <Button title='Stop' onPress={isStarted}/>
+            <Button title='Reset' onPress={reset}/>
+          </View>
+        );
+      }
+    } 
     
     if (!started) {
       return (
-        <View style={styles.container}>
+        <View>
           <View>
             <Text>{getTimeIncrements(time)}</Text>
   
@@ -111,6 +101,15 @@ import { styles } from './App';
   
           <View>
             {/* <Text> Best Time: {getTimeIncrements(topTimes)} </Text> */}
+            <View>
+                <Text>Leaderboard:</Text>
+                {
+                topTimes.map((topTime) => (
+                    <Text key ={topTime}>{getTimeIncrements(new Date(topTime) )}</Text>
+                ))
+                }
+            </View>
+
             <Button title='Start' onPress={isStarted}/>
             <Button title='Reset' onPress={reset}/>
           </View>
@@ -118,13 +117,22 @@ import { styles } from './App';
       );
     } else {
       return (
-        <View style={styles.container}>
+        <View>
           <View>
             <Text>{getTimeIncrements(time)}</Text>
           </View>
     
           <View>
             {/* <Text> Best Time: {getTimeIncrements(topTime)} </Text> */}
+            <View>
+                <Text>Leaderboard:</Text>
+                {
+                topTimes.map((topTime) => (
+                    <Text key ={topTime}>{getTimeIncrements(new Date(topTime) )}</Text>
+                ))
+                }
+            </View>
+
             <Button title='Stop' onPress={isStarted}/>
             <Button title='Reset' onPress={reset}/>
           </View>
@@ -132,3 +140,4 @@ import { styles } from './App';
       );
     }
   }
+  
