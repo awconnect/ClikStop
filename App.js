@@ -198,7 +198,9 @@ export default function App() {
   <AppContext.Provider value={{ state, dispatch }}>
     <View style={styles.container}>
         <StopWatch />
-        <Leaderboard />
+        <View style={styles.container}>
+          <Leaderboard />
+        </View>
     </View>
   </AppContext.Provider>
 
