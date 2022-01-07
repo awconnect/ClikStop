@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
-import {StyleSheet, View } from 'react-native';
-import { AppContext } from './App';
+// import { AppContext } from './App';
 import getTimeIncrements from "./App";
 import { styles } from './App';
+import { Button, StyleSheet, Text, View } from 'react-native';
 
 
 

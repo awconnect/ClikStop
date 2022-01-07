@@ -5,20 +5,27 @@ import MaterialCommunityIconsIcon from "react-native-vector-icons/MaterialCommun
 function MaterialIconTextButtonsFooter1(props) {
   return (
     <View style={[styles.container, props.style]}>
-      <TouchableOpacity style={styles.buttonWrapper1}>
+      <TouchableOpacity
+        onPress={() => console.log("Navigate to App")}
+        style={styles.buttonWrapper1}
+      >
         <MaterialCommunityIconsIcon
           name="timer"
           style={styles.icon1}
         ></MaterialCommunityIconsIcon>
         <Text style={styles.btn1Text}>Recent</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.buttonWrapper2}>
+      <TouchableOpacity
+        onPress={() => console.log("Navigate to App1")}
+        style={styles.buttonWrapper2}
+      >
         <MaterialCommunityIconsIcon
           name="map-marker-radius"
           style={styles.icon2}
         ></MaterialCommunityIconsIcon>
         <Text style={styles.btn2Text}>Nearby</Text>
       </TouchableOpacity>
+      <Text style={styles.loremIpsum}></Text>
     </View>
   );
 }
@@ -37,13 +44,17 @@ const styles = StyleSheet.create({
     elevation: 3
   },
   buttonWrapper1: {
-    flex: 1,
+    flex: 0.47,
     paddingTop: 8,
     paddingBottom: 10,
     paddingHorizontal: 12,
     minWidth: 80,
     maxWidth: 168,
-    alignItems: "center"
+    alignItems: "center",
+    left: 0,
+    width: 188,
+    top: 0,
+    height: 56
   },
   icon1: {
     backgroundColor: "transparent",
@@ -58,7 +69,7 @@ const styles = StyleSheet.create({
     paddingTop: 4
   },
   buttonWrapper2: {
-    flex: 1,
+    flex: 0.53,
     paddingTop: 8,
     paddingBottom: 10,
     paddingHorizontal: 12,
@@ -77,6 +88,14 @@ const styles = StyleSheet.create({
     color: "#9E9E9E",
     backgroundColor: "transparent",
     paddingTop: 4
+  },
+  loremIpsum: {
+    top: 37,
+    left: 90,
+    position: "absolute",
+    fontFamily: "roboto-regular",
+    color: "#121212",
+    flex: 0
   }
 });
 

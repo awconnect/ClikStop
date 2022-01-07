@@ -6,13 +6,14 @@ function App(props) {
   return (
     <View style={styles.container}>
       <View style={styles.group}>
-        <Text style={styles.clikStop2}>ClikStop</Text>
-        <Text style={styles.loremIpsum}>00:000</Text>
+        <Text style={styles.clikStop}>ClikStop</Text>
+        <Text style={styles.stopWatchView}>00:000</Text>
         <MaterialIconTextButtonsFooter1
           style={styles.materialIconTextButtonsFooter1}
         ></MaterialIconTextButtonsFooter1>
       </View>
-      <TouchableOpacity style={styles.button}></TouchableOpacity>
+      <TouchableOpacity style={styles.stopWatchTouchable}></TouchableOpacity>
+      <TouchableOpacity style={styles.resetTouchable}></TouchableOpacity>
     </View>
   );
 }
@@ -28,12 +29,12 @@ const styles = StyleSheet.create({
     marginTop: 60,
     marginLeft: 26
   },
-  clikStop2: {
+  clikStop: {
     fontFamily: "impact-regular",
     color: "rgba(74,74,74,1)",
     fontSize: 50
   },
-  loremIpsum: {
+  stopWatchView: {
     fontFamily: "roboto-regular",
     color: "rgba(74,74,74,1)",
     fontSize: 120,
@@ -47,11 +48,18 @@ const styles = StyleSheet.create({
     marginTop: 291,
     marginLeft: -26
   },
-  button: {
+  stopWatchTouchable: {
+    width: 362,
+    height: 140,
+    marginTop: 185,
+    marginLeft: 6
+  },
+  resetTouchable: {
     width: 375,
     height: 282,
     backgroundColor: "rgba(18,18,18,1)",
-    marginTop: 333
+    marginTop: 9,
+    alignSelf: "center"
   }
 });
 

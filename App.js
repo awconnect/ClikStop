@@ -6,6 +6,8 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 // import Leaderboard from './Leaderboard';
 
 
+export const AppContext = React.createContext();
+
 const Leaderboard = () => {
   const {state, dispatch} = useContext(AppContext);
   return (
@@ -21,8 +23,6 @@ const Leaderboard = () => {
 
   );
 }
-
-
 
 function StopWatch() {
 
@@ -119,7 +119,7 @@ function StopWatch() {
   //   }
   // } 
   
-  if (!started) {
+  // if (!started) {
     return (
       <View style={styles.container}>
         <View>
@@ -129,26 +129,27 @@ function StopWatch() {
 
         <View>
           {/* <Text> Best Time: {getTimeIncrements(topTimes)} </Text> */}
-          <Button title='Start' onPress={isStarted}/>
+          <Button title='Start/Stop' onPress={isStarted}/>
           <Button title='Reset' onPress={reset}/>
         </View>
       </View>
     );
-  } else {
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text>{getTimeIncrements(time)}</Text>
-        </View>
+  // } 
+  // else {
+  //   return (
+  //     <View style={styles.container}>
+  //       <View>
+  //         <Text>{getTimeIncrements(time)}</Text>
+  //       </View>
   
-        <View>
-          {/* <Text> Best Time: {getTimeIncrements(topTime)} </Text> */}
-          <Button title='Stop' onPress={isStarted}/>
-          <Button title='Reset' onPress={reset}/>
-        </View>
-      </View>
-    );
-  }
+  //       <View>
+  //         {/* <Text> Best Time: {getTimeIncrements(topTime)} </Text> */}
+  //         <Button title='Stop' onPress={isStarted}/>
+  //         <Button title='Reset' onPress={reset}/>
+  //       </View>
+  //     </View>
+  //   );
+  // }
 }
 
 
@@ -156,7 +157,6 @@ function StopWatch() {
 
 
 
-export const AppContext = React.createContext();
 
 const initialState = {
   topTimes: [],
