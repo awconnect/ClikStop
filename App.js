@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useReducer, useContext } from 'react';
 import { Button, StyleSheet, Text, View } from 'react-native';
-
 // import StopWatch  from './StopWatch';
 // import Leaderboard from './Leaderboard';
+import { NavigationContainer } from '@react-navigation/native';
+import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export const AppContext = React.createContext();
@@ -11,7 +13,7 @@ export const AppContext = React.createContext();
 const Leaderboard = () => {
   const {state, dispatch} = useContext(AppContext);
   return (
-      <View>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
           <Text>Leaderboard:</Text>
           {
           state.topTimes.map((topTime) => (
@@ -37,7 +39,6 @@ function StopWatch() {
   let defTime = new Date();
   const [time, setTime] = useState(new Date(defTime - defTime));
   const [startTime, setStartTime] = useState(null);
-  //const [topTimes, setTopTimes] = useState([]);
 
   useEffect(() => {
     let interval = null;
@@ -52,8 +53,7 @@ function StopWatch() {
     } else if (!started && isFirst) {
       if (state.topTimes === [] || ((state.topTimes.length < 5) && !(state.topTimes.includes(time.getTime())) ) ) {
         changeTopTimesValue([...state.topTimes, time.getTime()].sort());
-        //setTopTimes([...topTimes, time.getTime()].sort());
-        // setTopTimes(time);
+
       }
       else {
         let arr = state.topTimes;
@@ -62,11 +62,7 @@ function StopWatch() {
           arr.sort();
           changeTopTimesValue(arr);
         }
-        // setTopTimes(time<topTimes[4] ? [...topTimes, time].sort()[:5] : topTimes);
-        
-        // if (topTimes > time) {
-        //    setTopTime(time);
-        // } 
+
       }
       clearInterval(interval);
     }
@@ -93,67 +89,58 @@ function StopWatch() {
     }
   }
 
-  // if(state.topTimes === []) {
-  //   if (!started) {
-  //     return (
-  //       <View style={styles.container}>
-  //         <View>
-  //           <Text>{getTimeIncrements(time)}</Text>
-  //         </View>
-  
-  //         <Button title='Start' onPress={isStarted}/>
-  //         <Button title='Reset' onPress={reset}/>
-  //       </View>
-  //     );
-  //   } else {
-  //     return (
-  //       <View style={styles.container}>
-  //         <View>
-  //           <Text>{getTimeIncrements(time)}</Text>
-  //         </View>
-
-  //         <Button title='Stop' onPress={isStarted}/>
-  //         <Button title='Reset' onPress={reset}/>
-  //       </View>
-  //     );
-  //   }
-  // } 
-  
-  // if (!started) {
-    return (
-      <View style={styles.container}>
-        <View>
-          <Text>{getTimeIncrements(time)}</Text>
-
-        </View>
-
-        <View>
-          {/* <Text> Best Time: {getTimeIncrements(topTimes)} </Text> */}
-          <Button title='Start/Stop' onPress={isStarted}/>
-          <Button title='Reset' onPress={reset}/>
-        </View>
+  return (
+    <View style={styles.container}>
+      <View>
+        <Text>{getTimeIncrements(time)}</Text>
       </View>
-    );
-  // } 
-  // else {
-  //   return (
-  //     <View style={styles.container}>
-  //       <View>
-  //         <Text>{getTimeIncrements(time)}</Text>
-  //       </View>
-  
-  //       <View>
-  //         {/* <Text> Best Time: {getTimeIncrements(topTime)} </Text> */}
-  //         <Button title='Stop' onPress={isStarted}/>
-  //         <Button title='Reset' onPress={reset}/>
-  //       </View>
-  //     </View>
-  //   );
-  // }
+
+      <View>
+        <Button title='Start/Stop' onPress={isStarted}/>
+        <Button title='Reset' onPress={reset}/>
+      </View>
+    </View>
+  );
 }
 
 
+const Tab = createMaterialBottomTabNavigator();
 
+function MyTabs() {
+  return (
+    <Tab.Navigator
+      initialRouteName="StopWatch"
+      activeColor="white"
+      labelStyle={{ fontSize: 12 }}
+      // style={{ backgroundColor: '#08457e' }}
+      barStyle= {{
+        //  height : 75, 
+         backgroundColor: '#2c3b42' 
+        }}
+    >
+      <Tab.Screen
+        name="StopWatch"
+        component={StopWatch}
+        options={{
+          tabBarLabel: 'StopWatch',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="timer" color={color} size={26} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Leaderboard"
+        component={Leaderboard}
+        options={{
+          tabBarLabel: 'Leaderboard',
+          tabBarIcon: ({ color }) => (
+            <MaterialCommunityIcons name="trophy" color={color} size={26} />
+          ),
+        }}
+      />
+    </Tab.Navigator>
+  );
+}
 
 
 
@@ -196,12 +183,15 @@ export default function App() {
 
  return (
   <AppContext.Provider value={{ state, dispatch }}>
-    <View style={styles.container}>
+    {/* <View style={styles.container}>
         <StopWatch />
         <View style={styles.container}>
           <Leaderboard />
         </View>
-    </View>
+    </View> */}
+    <NavigationContainer>
+      <MyTabs />
+    </NavigationContainer>
   </AppContext.Provider>
 
  );
