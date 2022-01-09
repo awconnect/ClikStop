@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useEffect, useState, useReducer, useContext } from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import { Button, SafeAreaView, StyleSheet, Text, View } from 'react-native';
 // import StopWatch  from './StopWatch';
 // import Leaderboard from './Leaderboard';
 import { NavigationContainer } from '@react-navigation/native';
 import { createMaterialBottomTabNavigator } from '@react-navigation/material-bottom-tabs';
+import { createMaterialTopTabNavigator } from '@react-navigation/material-top-tabs';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
@@ -104,19 +105,15 @@ function StopWatch() {
 }
 
 
-const Tab = createMaterialBottomTabNavigator();
+const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
   return (
     <Tab.Navigator
       initialRouteName="StopWatch"
-      activeColor="white"
+      activeColor="green"
       labelStyle={{ fontSize: 12 }}
-      // style={{ backgroundColor: '#08457e' }}
-      barStyle= {{
-        //  height : 75, 
-         backgroundColor: '#2c3b42' 
-        }}
+      tabBarPosition = "bottom"
     >
       <Tab.Screen
         name="StopWatch"
