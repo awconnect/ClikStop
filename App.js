@@ -53,20 +53,20 @@ function StopWatch() {
       }, 1);
     } else if (!started && isFirst) {
       if (state.topTimes === [] || ((state.topTimes.length < 5) && !(state.topTimes.includes(time.getTime())) ) ) {
-        changeTopTimesValue([...state.topTimes, time.getTime()].sort());
+        changeTopTimesValue([...state.topTimes, time.getTime()].sort((a, b) => a - b));
 
       }
       else {
         let arr = state.topTimes;
-        if (time.getTime() < arr[4] && !(state.topTimes.includes(time.getTime()) )) {
+        if (time.getTime() < arr[4] && !(state.topTimes.includes(time.getTime())) ) {
           arr[4] = time.getTime();
-          arr.sort();
+          arr.sort((a, b) => a - b);
           changeTopTimesValue(arr);
         }
 
       }
       clearInterval(interval);
-    }
+    } 
     return () => {
       clearInterval(interval);
     }
@@ -104,16 +104,25 @@ function StopWatch() {
   );
 }
 
-
 const Tab = createMaterialTopTabNavigator();
 
 function MyTabs() {
+  const tabBarOptions = {
+    tabBarActiveTintColor: "black",
+    tabBarInactiveTintColor: "white",
+    "tabBarIndicatorStyle": {
+      "backgroundColor": "red",
+      "height": "0%"
+    },
+    tabBarStyle: { backgroundColor: 'powderblue'}
+  }
+
   return (
     <Tab.Navigator
       initialRouteName="StopWatch"
-      activeColor="green"
       labelStyle={{ fontSize: 12 }}
       tabBarPosition = "bottom"
+      screenOptions={tabBarOptions}
     >
       <Tab.Screen
         name="StopWatch"
